@@ -44,6 +44,6 @@ class Controller_API_Posts extends Abstract_Controller_API
 
 	public function action_put_entity()
 	{
-		$this->response->body('Putting post '.$this->request->param('id'));
+		$this->response->body(json_encode(array('error' => 'Can\'t update posts')));
 	}
 }
