@@ -24,6 +24,22 @@ class Mapper_Post
 		return $post;
 	}
 
+	public function find($id)
+	{
+		$result = DB::select()
+			->from('posts')
+			->where('id', '=', $id)
+			->execute($this->_database)
+			->current();
+
+		if ( ! $result)
+		{
+			return NULL;
+		}
+
+		return new Model_Post($result);
+	}
+
 	public function find_all()
 	{
 		$results = DB::select()

@@ -18,7 +18,18 @@ class Controller_API_Posts extends Abstract_Controller_API
 
 	public function action_get_entity()
 	{
-		$this->response->body('Getting post '.$this->request->param('id'));
+		$mapper = new Mapper_Post(Database::instance());
+		$post = $mapper->find($this->request->param('id'));
+
+		if ( ! $post)
+		{
+			// @TODO: Exception
+			$this->response->body(json_encode(array('error' => 'post not found')));
+		}
+		else
+		{
+			$this->response->body(json_encode($post->as_array()));
+		}
 	}
 
 	public function action_post_collection()
