@@ -2,6 +2,13 @@
 
 class Controller_API_Posts extends Abstract_Controller_API
 {
+	public function before()
+	{
+		parent::before();
+
+		$this->response->headers('content-type', 'application/json');
+	}
+
 	public function action_get_collection()
 	{
 		$mapper = new Mapper_Post(Database::instance());
