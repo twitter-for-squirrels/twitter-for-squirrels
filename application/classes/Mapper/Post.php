@@ -23,4 +23,20 @@ class Mapper_Post
 
 		return $post;
 	}
+
+	public function find_all()
+	{
+		$results = DB::select()
+			->from('posts')
+			->execute($this->_database);
+
+		$array = array();
+
+		foreach ($results as $result)
+		{
+			$array[] = new Model_Post($result);
+		}
+
+		return $array;
+	}
 }
