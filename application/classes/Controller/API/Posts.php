@@ -4,7 +4,16 @@ class Controller_API_Posts extends Abstract_Controller_API
 {
 	public function action_get_collection()
 	{
-		$this->response->body('Getting a collection of posts');
+		$mapper = new Mapper_Post(Database::instance());
+		$posts = $mapper->find_all();
+
+		$data = array();
+		foreach ($posts as $post)
+		{
+			$data[] = $post->as_array();
+		}
+
+		$this->response->body(json_encode($data));
 	}
 
 	public function action_get_entity()
