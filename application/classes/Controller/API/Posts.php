@@ -42,8 +42,33 @@ class Controller_API_Posts extends Abstract_Controller_API
 		$this->response->body(json_encode($post->as_array()));
 	}
 
+	public function action_post_entity()
+	{
+		$this->_handle_unsupported_verb();
+	}
+
+	public function action_put_collection()
+	{
+		$this->_handle_unsupported_verb();
+	}
+
 	public function action_put_entity()
 	{
-		$this->response->body(json_encode(array('error' => 'Can\'t update posts')));
+		$this->_handle_unsupported_verb();
+	}
+
+	public function action_delete_collection()
+	{
+		$this->_handle_unsupported_verb();
+	}
+
+	public function action_delete_entity()
+	{
+		$this->_handle_unsupported_verb();
+	}
+
+	protected function _handle_unsupported_verb()
+	{
+		$this->response->body(json_encode(array('error' => 'Can\'t do that')));
 	}
 }
