@@ -46,3 +46,6 @@
 [submodule "modules/minion-tasks-media"]
 	path = modules/minion-tasks-media
 	url = git://github.com/Zeelot/minion-tasks-media.git
+[submodule "vagrant/roles"]
+	path = vagrant/roles
+	url = git://github.com/Zeelot/vagrant-chef-roles.git
