@@ -14,7 +14,12 @@ class Controller_API_Posts extends Abstract_Controller_API
 
 	public function action_post_collection()
 	{
-		$this->response->body('Posting a new … post … to the collection.');
+		$mapper = new Mapper_Post(Database::instance());
+
+		$post = new Model_Post(json_decode($this->request->body(), TRUE));
+		$mapper->insert($post);
+
+		$this->response->body(json_encode($post->as_array()));
 	}
 
 	public function action_put_entity()
