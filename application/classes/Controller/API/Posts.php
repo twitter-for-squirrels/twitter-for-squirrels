@@ -23,8 +23,7 @@ class Controller_API_Posts extends Abstract_Controller_API
 
 		if ( ! $post)
 		{
-			// @TODO: Exception
-			$this->response->body(json_encode(array('error' => 'post not found')));
+			throw new HTTP_Exception_404("That post does not exist");
 		}
 		else
 		{
@@ -34,12 +33,7 @@ class Controller_API_Posts extends Abstract_Controller_API
 
 	public function action_post_collection()
 	{
-		$mapper = new Mapper_Post(Database::instance());
-
-		$post = new Model_Post(json_decode($this->request->body(), TRUE));
-		$mapper->insert($post);
-
-		$this->response->body(json_encode($post->as_array()));
+		$this->response->body(json_encode(array('error' => 'Can\'t add posts this way!')));
 	}
 
 	public function action_put_entity()

@@ -55,4 +55,19 @@ class Mapper_Post
 
 		return $array;
 	}
+
+	public function find_by_user(Model_User $user) {
+		$results = DB::select()
+			->from('posts')
+			->where('user_id', '=', $user->get('id'))
+			->execute($this->_database);
+
+		$models = array();
+		foreach ($results as $result)
+		{
+			$models[] = new Model_Post($result);
+		}
+
+		return $models;
+	}
 }
