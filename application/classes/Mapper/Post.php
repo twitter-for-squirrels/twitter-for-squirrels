@@ -70,21 +70,4 @@ class Mapper_Post
 
 		return $models;
 	}
-
-	public function find_all_by_user_id($user_id)
-	{
-		$results = DB::select()
-			->from('posts')
-			->where('user_id', '=', (int) $user_id)
-			->execute($this->_database);
-
-		$array = array();
-
-		foreach ($results as $result)
-		{
-			$array[] = new Model_Post($result);
-		}
-
-		return $array;
-	}
 }

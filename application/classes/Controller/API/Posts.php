@@ -13,14 +13,7 @@ class Controller_API_Posts extends Abstract_Controller_API
 	{
 		$mapper = new Mapper_Post(Database::instance());
 
-		if ($this->request->query('user_id'))
-		{
-			$posts = $mapper->find_all_by_user_id($this->request->query('user_id'));
-		}
-		else
-		{
-			$posts = $mapper->find_all();
-		}
+		$posts = $mapper->find_all();
 
 		$data = array();
 		foreach ($posts as $post)
