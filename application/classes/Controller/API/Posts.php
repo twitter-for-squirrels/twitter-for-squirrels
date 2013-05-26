@@ -2,10 +2,25 @@
 
 class Controller_API_Posts extends Abstract_Controller_API
 {
+	public function before()
+	{
+		parent::before();
+
+		$this->response->headers('content-type', 'application/json');
+	}
+
 	public function action_get_collection()
 	{
 		$mapper = new Mapper_Post(Database::instance());
-		$posts = $mapper->find_all();
+
+		if ($this->request->query('user_id'))
+		{
+			$posts = $mapper->find_all_by_user_id($this->request->query('user_id'));
+		}
+		else
+		{
+			$posts = $mapper->find_all();
+		}
 
 		$data = array();
 		foreach ($posts as $post)
@@ -36,8 +51,33 @@ class Controller_API_Posts extends Abstract_Controller_API
 		$this->response->body(json_encode(array('error' => 'Can\'t add posts this way!')));
 	}
 
+	public function action_post_entity()
+	{
+		$this->_handle_unsupported_verb();
+	}
+
+	public function action_put_collection()
+	{
+		$this->_handle_unsupported_verb();
+	}
+
 	public function action_put_entity()
 	{
-		$this->response->body(json_encode(array('error' => 'Can\'t update posts')));
+		$this->_handle_unsupported_verb();
+	}
+
+	public function action_delete_collection()
+	{
+		$this->_handle_unsupported_verb();
+	}
+
+	public function action_delete_entity()
+	{
+		$this->_handle_unsupported_verb();
+	}
+
+	protected function _handle_unsupported_verb()
+	{
+		$this->response->body(json_encode(array('error' => 'Can\'t do that')));
 	}
 }
