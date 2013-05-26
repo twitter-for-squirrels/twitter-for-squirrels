@@ -11,7 +11,7 @@ Battlefield 3, so I guess it probably works. We should probably do some sniff te
 
         apt-get install python-setuptools
         easy_install pip
-2. Install libevent: `apt-get install libevent-devel`
+2. Install libevent: `apt-get install libevent-dev`
 2. Install python-dev `apt-get install python-dev`
 2. Install locust.io `pip install locustio`
 
